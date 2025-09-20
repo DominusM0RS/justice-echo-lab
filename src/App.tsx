@@ -10,6 +10,7 @@ import ConsultLawyers from "./pages/ConsultLawyers";
 import LawyerProfile from "./pages/LawyerProfile";
 import ChatbotAdvisor from "./pages/ChatbotAdvisor";
 import NotFound from "./pages/NotFound";
+import AnalyzePage from "./pages/AnalyzePage"; // <-- Import your AnalyzePage
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/consult-lawyers" element={<ConsultLawyers />} />
           <Route path="/lawyer/:id" element={<LawyerProfile />} />
           <Route path="/chatbot-advisor" element={<ChatbotAdvisor />} />
+          <Route path="/analyze" element={<AnalyzePage />} /> {/* <-- New route added */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
