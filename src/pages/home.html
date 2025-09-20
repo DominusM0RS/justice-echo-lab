@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Test Backend Upload</title>
+</head>
+<body>
+  <h2>Upload a PDF to /analyze</h2>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" id="fileInput" name="file" accept="application/pdf,image/*">
+    <button id="submitBtn" type="submit">Upload & Analyze</button>
+  </form>
+
+  <h3>Server Response:</h3>
+  <pre id="responseBox" style="background-color: #f0f0f0; padding: 1em; border: 1px solid #ccc; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; min-height: 50px;"></pre>
+
+  <hr style="margin: 2em 0;">
+
+  <h2>Ask a follow-up question</h2>
+  <input type="text" id="questionInput" placeholder="Type your question here..." style="width: 80%; padding: 8px;">
+  <button id="askBtn">Ask</button>
+
+  <h3>Answer:</h3>
+  <pre id="answerBox" style="background-color: #eaf4ff; padding: 1em; border: 1px solid #a3c9f7; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; min-height: 50px;"></pre>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const fileInput = document.getElementById('fileInput');
+    const responseBox = document.getElementById('responseBox');
+    const submitBtn = document.getElementById('submitBtn');
+    const questionInput = document.getElementById('questionInput');
+    const askBtn = document.getElementById('askBtn');
+    const answerBox = document.getElementById('answerBox');
+
+    // Declare contractContext in a scope accessible by both functions
+    let contractContext = null;
+
+    form.addEventListener('submit', async (e) => {
+      const questionInput = document.getElementById('questionInput');
+      const askBtn = document.getElementById('askBtn');
+      const answerBox = document.getElementById('answerBox');
+
+      let contractContext = null;
+
+      // 1. Prevent the default form submission which reloads the page
+      e.preventDefault();
+
+      if (!fileInput.files.length) {
+        responseBox.textContent = 'Error: Please select a file first.';
+        return;
+      }
+
+      // 2. Provide user feedback
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Analyzing...';
+      responseBox.textContent = 'Uploading and processing your document...';
+
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+
+      try {
+        // 3. Use the Fetch API to send the file asynchronously
+        const response = await fetch('http://localhost:3000/analyze', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        // 4. Display the formatted JSON response
+        responseBox.textContent = JSON.stringify(data, null, 2);
+        // Save the raw text for follow-up questions
+        contractContext = data.rawText;
+      } catch (error) {
+        responseBox.textContent = `An error occurred: ${error.message}`;
+        console.error('Upload failed:', error);
+      } finally {
+        // 5. Re-enable the button
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Upload & Analyze';
+      }
+    });
+
+    askBtn.addEventListener('click', async () => {
+      const question = questionInput.value;
+
+      if (!question) {
+        answerBox.textContent = 'Error: Please type a question first.';
+        return;
+      }
+
+      if (!contractContext) {
+        answerBox.textContent = 'Error: Please analyze a document first to provide context.';
+        return;
+      }
+
+      askBtn.disabled = true;
+      askBtn.textContent = 'Asking...';
+      answerBox.textContent = 'Thinking...';
+
+... (25 lines left)
+Collapse
+message.txt
+5 KB
+Desolate — 21:53
+theek ba
+﻿
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Test Backend Upload</title>
+</head>
+<body>
+  <h2>Upload a PDF to /analyze</h2>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" id="fileInput" name="file" accept="application/pdf,image/*">
+    <button id="submitBtn" type="submit">Upload & Analyze</button>
+  </form>
+
+  <h3>Server Response:</h3>
+  <pre id="responseBox" style="background-color: #f0f0f0; padding: 1em; border: 1px solid #ccc; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; min-height: 50px;"></pre>
+
+  <hr style="margin: 2em 0;">
+
+  <h2>Ask a follow-up question</h2>
+  <input type="text" id="questionInput" placeholder="Type your question here..." style="width: 80%; padding: 8px;">
+  <button id="askBtn">Ask</button>
+
+  <h3>Answer:</h3>
+  <pre id="answerBox" style="background-color: #eaf4ff; padding: 1em; border: 1px solid #a3c9f7; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; min-height: 50px;"></pre>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const fileInput = document.getElementById('fileInput');
+    const responseBox = document.getElementById('responseBox');
+    const submitBtn = document.getElementById('submitBtn');
+    const questionInput = document.getElementById('questionInput');
+    const askBtn = document.getElementById('askBtn');
+    const answerBox = document.getElementById('answerBox');
+
+    // Declare contractContext in a scope accessible by both functions
+    let contractContext = null;
+
+    form.addEventListener('submit', async (e) => {
+      const questionInput = document.getElementById('questionInput');
+      const askBtn = document.getElementById('askBtn');
+      const answerBox = document.getElementById('answerBox');
+
+      let contractContext = null;
+
+      // 1. Prevent the default form submission which reloads the page
+      e.preventDefault();
+
+      if (!fileInput.files.length) {
+        responseBox.textContent = 'Error: Please select a file first.';
+        return;
+      }
+
+      // 2. Provide user feedback
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Analyzing...';
+      responseBox.textContent = 'Uploading and processing your document...';
+
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+
+      try {
+        // 3. Use the Fetch API to send the file asynchronously
+        const response = await fetch('http://localhost:3000/analyze', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        // 4. Display the formatted JSON response
+        responseBox.textContent = JSON.stringify(data, null, 2);
+        // Save the raw text for follow-up questions
+        contractContext = data.rawText;
+      } catch (error) {
+        responseBox.textContent = `An error occurred: ${error.message}`;
+        console.error('Upload failed:', error);
+      } finally {
+        // 5. Re-enable the button
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Upload & Analyze';
+      }
+    });
+
+    askBtn.addEventListener('click', async () => {
+      const question = questionInput.value;
+
+      if (!question) {
+        answerBox.textContent = 'Error: Please type a question first.';
+        return;
+      }
+
+      if (!contractContext) {
+        answerBox.textContent = 'Error: Please analyze a document first to provide context.';
+        return;
+      }
+
+      askBtn.disabled = true;
+      askBtn.textContent = 'Asking...';
+      answerBox.textContent = 'Thinking...';
+
+      try {
+        const res = await fetch('http://localhost:3000/ask', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question, context: contractContext }),
+        });
+
+        if (!res.ok) {
+          throw new Error(`Server error: ${res.status} ${res.statusText}`);
+        }
+
+        const data = await res.json();
+        answerBox.textContent = data.answer;
+      } catch (error) {
+        answerBox.textContent = `An error occurred: ${error.message}`;
+        console.error('Ask question failed:', error);
+      } finally {
+        askBtn.disabled = false;
+        askBtn.textContent = 'Ask';
+      }
+    });
+  </script>
+</body>
+</html>
