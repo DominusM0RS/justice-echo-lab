@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -7,29 +8,29 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Left Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-foreground hover:text-accent transition-colors">
+            <Link to="/about-us" className="text-foreground hover:text-accent transition-colors">
               About Us
-            </a>
-            <a href="#" className="text-foreground hover:text-accent transition-colors">
+            </Link>
+            <Link to="/educate-yourself" className="text-foreground hover:text-accent transition-colors">
               Educate Yourself
-            </a>
+            </Link>
           </nav>
 
           {/* Center Logo */}
           <div className="flex items-center space-x-2">
-            <div className="text-2xl font-bold text-foreground">
+            <Link to="/" className="text-2xl font-bold text-foreground hover:text-accent transition-colors">
               TIME<span className="text-accent">2</span>JUSTICE
-            </div>
+            </Link>
           </div>
 
           {/* Right Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-foreground hover:text-accent transition-colors">
+            <Link to="/chatbot-advisor" className="text-foreground hover:text-accent transition-colors">
               Chatbot Advisor
-            </a>
-            <a href="#" className="text-foreground hover:text-accent transition-colors">
+            </Link>
+            <Link to="/consult-lawyers" className="text-foreground hover:text-accent transition-colors">
               Consult Lawyers
-            </a>
+            </Link>
           </nav>
         </div>
       </div>
