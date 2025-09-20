@@ -22,7 +22,7 @@ const Header = () => {
           {/* Center Logo */}
           <div className="flex items-center space-x-2">
             <Link to="/" className="text-2xl font-bold text-foreground hover:text-accent transition-colors">
-              COMPANY<span className="text-accent">-</span>NAME
+              TIME<span className="text-accent">2</span>JUSTICE
             </Link>
           </div>
 
