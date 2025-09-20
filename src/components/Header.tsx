@@ -14,6 +14,9 @@ const Header = () => {
             <Link to="/educate-yourself" className="text-foreground hover:text-accent transition-colors">
               Educate Yourself
             </Link>
+            <Link to="/analyze" className="text-foreground hover:text-accent transition-colors">
+              Analyze
+            </Link>
           </nav>
 
           {/* Center Logo */}
